@@ -37,7 +37,7 @@ List<Ellipse> ellipseList = ellipseDetector.getFinalEllipseList();
 4. Auto-threshold for the Canny edge detector is not fast and linear with the size of the image.
 Setting low/high threshold is much faster. Also, auto-threshold still has some parameters. Check out the code if it is
 not working
-5. Finding straight lines only uses 3 points, but this can be turned off to use all points (but slower)
+5. Finding straight lines only uses 5 points, but this can be turned off to use all points (but slower)
 
 ### References
 
@@ -82,6 +82,7 @@ to two points, a matching point was interpolated to get the exact slope.
 
 ### Disclaimer
 
-This is released into the public domain with no restrictions or guarantees.
+This is released into the public domain with no restrictions or guarantees. This project is not associated with the
+original authors of any of the papers in any way.
 
 This is intended for single threaded use only.
