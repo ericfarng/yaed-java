@@ -5,7 +5,7 @@
 
 This is a library to detect ellipses within an image.
 
-#### Usage:
+### Usage:
 ```java
 File imageFile = new File("image.png");
 BufferedImage bufferedImage = ImageIO.read(imageFile);
@@ -27,17 +27,17 @@ BufferedImage ellipseImage = ellipseDetector.createFinalEllipseImage();
 List<Ellipse> ellipseList = ellipseDetector.getFinalEllipseList();
 ```
 
-#### Tips:
+### Tips:
 
 1. Play with the 4 parameters of the Canny edge detector and make sure the ellipse edge is visible here.
 2. Parameters for the ellipse detection:
-  1. minimumArcPixelCount = remove small ellipses / noise.
-  2. minimumBoundingBoxSize = remove straight lines
-  3. distanceToEllipseContour, distanceToEllipseContourScoreCutoff, reliabilityCutoff = allow for more ellipse detection, but worse fits
+ 1. minimumArcPixelCount = remove small ellipses / noise.
+ 2. minimumBoundingBoxSize = remove straight lines
+ 3. distanceToEllipseContour, distanceToEllipseContourScoreCutoff, reliabilityCutoff = allow for more ellipse detection, but worse fits
 
-#### References
+### References
 
-This is a java implementation of this paper:
+###### This is a java implementation of this paper:
 
 **[1]** A fast and effective ellipse detector for embedded vision applications
 
@@ -46,17 +46,17 @@ Michele Fornaciariab, Andrea Pratibc, Rita Cucchiaraab
 http://ieeexplore.ieee.org/document/6470150/
 
 
-Also uses the reference implementation in c++
+###### Also uses the reference implementation in c++
 
 https://sourceforge.net/projects/yaed/
 
 
-The Canny edge detector came from here:
+###### The Canny edge detector came from here:
 
 http://www.tomgibara.com/computer-vision/CannyEdgeDetector.java
 
 
-This is also uses options from this paper
+###### This is also uses options from this paper
 
 **[2]** A Fast Ellipse Detector Using Projective Invariant Pruning
 
@@ -64,7 +64,7 @@ Qi Jia, Xin Fan, Member, IEEE, Zhongxuan Luo, Lianbo Song, and Tie Qiu
 
 http://ieeexplore.ieee.org/document/7929406/
 
-#### Differences from paper/reference implementation
+### Differences from paper/reference implementation
 
 1. The canny edge detector is not ported from the reference ellipse implementation. An unrelated implementation was
 found instead. However, the automatic high/low threshold option was taken from the ellipse implementation and added
@@ -79,7 +79,7 @@ searching for a matching point with the closest slope. In this implementation, a
 to two points, a matching point was interpolated to get the exact slope.
 
 
-#### Disclaimer
+### Disclaimer
 
 This is released into the public domain with no restrictions or guarantees.
 
