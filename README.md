@@ -35,6 +35,10 @@ List<Ellipse> ellipseList = ellipseDetector.getFinalEllipseList();
   2. minimumBoundingBoxSize = remove straight lines
   3. distanceToEllipseContour, distanceToEllipseContourScoreCutoff, reliabilityCutoff = remove poorly fitting ellipses and ellipse noise
 3. If things aren't working, check out the example for details how to output intermediate debug images 
+4. Auto-threshold for the Canny edge detector is not fast and linear with the size of the image.
+Setting low/high threshold is much faster. Also, auto-threshold still has some parameters. Check out the code if it is
+not working
+5. Finding straight lines only uses 3 points, but this can be turned off to use all points (but slower)
 
 ### References
 

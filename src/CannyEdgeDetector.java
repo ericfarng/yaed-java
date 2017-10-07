@@ -54,16 +54,24 @@ public class CannyEdgeDetector {
     private BufferedImage sourceImage;
     private BufferedImage edgeImage;
 
-    private float gaussianKernelRadius;
+    private boolean autoThreshold = false;
     private float lowThreshold;
     private float highThreshold;
     private int gaussianKernelWidth;
+    private float gaussianKernelRadius;
     private boolean contrastNormalized;
+
+    // auto threshold magic numbers
+    private int autoThresholdNumBins = 64;
+    private float autoThresholdPercentOfPixelsNotEdges = 0.9f;
+    private float autoThresholdRatio = 0.3f;
 
     private float[] xConv;
     private float[] yConv;
     private float[] xGradient;
     private float[] yGradient;
+
+    private float maxGradient = -1;
 
     // constructors
 
@@ -151,6 +159,7 @@ public class CannyEdgeDetector {
     public void setLowThreshold(float threshold) {
         if (threshold < 0) throw new IllegalArgumentException();
         lowThreshold = threshold;
+        autoThreshold = false;
     }
 
     /**
@@ -175,6 +184,11 @@ public class CannyEdgeDetector {
     public void setHighThreshold(float threshold) {
         if (threshold < 0) throw new IllegalArgumentException();
         highThreshold = threshold;
+        autoThreshold = false;
+    }
+
+    public void setAutoThreshold(boolean autoThreshold) {
+        this.autoThreshold = autoThreshold;
     }
 
     /**
@@ -257,6 +271,9 @@ public class CannyEdgeDetector {
         readLuminance();
         if (contrastNormalized) normalizeContrast();
         computeGradients(gaussianKernelRadius, gaussianKernelWidth);
+        if (autoThreshold) {
+            setAutoHighLowThreshold();
+        }
         int low = Math.round(lowThreshold * MAGNITUDE_SCALE);
         int high = Math.round( highThreshold * MAGNITUDE_SCALE);
         performHysteresis(low, high);
@@ -353,6 +370,11 @@ public class CannyEdgeDetector {
                 }
 
                 yGradient[index] = sum;
+
+                if (autoThreshold) {
+                    float totalGradient = Math.abs(xGradient[index]) + Math.abs(yGradient[index]);
+                    maxGradient = totalGradient > maxGradient ? totalGradient : maxGradient;
+                }
             }
 
         }
@@ -436,6 +458,27 @@ public class CannyEdgeDetector {
                 }
             }
         }
+    }
+
+    // determine hysteresis thresholds
+    private void setAutoHighLowThreshold() {
+        int binSize = (int) Math.floor(maxGradient / autoThresholdNumBins + 0.5f) + 1;
+        if (binSize < 1) binSize = 1;
+        int[] binCounter = new int[autoThresholdNumBins];
+        for (int i = 0; i < xGradient.length; i++) {
+            float totalGradient = Math.abs(xGradient[i]) + Math.abs(yGradient[i]);
+            binCounter[(int) totalGradient / binSize]++;
+        }
+        float total = 0f;
+        float target = sourceImage.getHeight() * sourceImage.getWidth() * autoThresholdPercentOfPixelsNotEdges;
+        int highThreshold = 0;
+        while (total < target) {
+            total += binCounter[highThreshold];
+            highThreshold++;
+        }
+        highThreshold *= binSize;
+        this.highThreshold = highThreshold;
+        this.lowThreshold = highThreshold * autoThresholdRatio;
     }
 
     //NOTE: It is quite feasible to replace the implementation of this method

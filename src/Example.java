@@ -14,15 +14,21 @@ public class Example {
 
 
     public static void main(String[] args) throws IOException {
-        File directory = new File("testEllipse");
-        File screenshot = new File(directory, "x-195.12825-y-197.94994-rho-1.375566-n-0.26007044-aAxis-173.52641-bAxis-45.12909.png");
-        processFile(screenshot, new File("working3"), ImageIO.read(screenshot));
+        File directory = new File("screenshot default name");
+        File file = new File(directory, "Screenshot_2017-02-21-00-47-38.png");
+//        File directory = new File("testEllipse");
+//        File file = new File(directory, "x-195.12825-y-197.94994-rho-1.375566-n-0.26007044-aAxis-173.52641-bAxis-45.12909.png");
+
+        File outDirectory = new File("working");
+        if (outDirectory.exists() == false) outDirectory.mkdirs();
+        processFile(file, outDirectory, ImageIO.read(file));
     }
 
     public static void processFile(File screenshot, File outputDirectory, BufferedImage bufferedImage) throws IOException {
         CannyEdgeDetector cannyEdgeDetector = new CannyEdgeDetector();
-        cannyEdgeDetector.setLowThreshold(0.3125f); // 2.5
-        cannyEdgeDetector.setHighThreshold(3.75f); // 7.5
+//        cannyEdgeDetector.setLowThreshold(0.3125f); // 2.5
+//        cannyEdgeDetector.setHighThreshold(3.75f); // 7.5
+        cannyEdgeDetector.setAutoThreshold(true);
         // 2 is default for CannyEdgeDetector but 1 is setting from Ellipse reference code
         cannyEdgeDetector.setGaussianKernelRadius(1f); // 2
         // 16 is default for Canny Edge Detector, but 5 is setting from ellipse reference code.
