@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/workspace.xml
+out/
+/screenshot default name/
+/testEllipse/
+/testEllipseOut/
+/working/
+/.idea/
+/yaed-java.iml
