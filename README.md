@@ -12,8 +12,7 @@ BufferedImage bufferedImage = ImageIO.read(imageFile);
 
 CannyEdgeDetector cannyEdgeDetector = new CannyEdgeDetector();
 // any parameters you want, these are the defaults from the ellipse reference implementation
-cannyEdgeDetector.setLowThreshold(2.5f);
-cannyEdgeDetector.setHighThreshold(7.5f);
+cannyEdgeDetector.setAutoThreshold(true);
 cannyEdgeDetector.setGaussianKernelRadius(1);
 cannyEdgeDetector.setGaussianKernelWidth(5);
 cannyEdgeDetector.setSourceImage(bufferedImage);
@@ -74,12 +73,9 @@ http://ieeexplore.ieee.org/document/7929406/
 1. The canny edge detector is not ported from the reference ellipse implementation. An unrelated implementation was
 found instead. However, the automatic high/low threshold option was taken from the ellipse implementation and added
 to this one.
-2. The 'distanceToEllipseContour' parameter is used to see if the pixel is close to the ellipse formula. the
-original paper has it as 0.1, but changing to 0.5 gives much better results on my synthetic ellipse test. I don't
-know why this is happening.
-3. The paper detects straight lines was done using an oriented bounding box and checking its width. Instead, an
+2. The paper detects straight lines was done using an oriented bounding box and checking its width. Instead, an
 axis-oriented bounding box was used and points were checked for distance from the diagonal.
-4. In the reference implementation, finding parallel chords across two arcs was done by picking one point, then binary
+3. In the reference implementation, finding parallel chords across two arcs was done by picking one point, then binary
 searching for a matching point with the closest slope. In this implementation, after the binary search narrowed down
 to two points, a matching point was interpolated to get the exact slope.
 

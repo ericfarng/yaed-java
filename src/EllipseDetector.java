@@ -76,7 +76,7 @@ public class EllipseDetector {
 
     // distance from point to ellipse to count as on the ellipse, paper default = 0.1
     // on the synthetic test case here, using 0.5f has much better results, I don't know why
-    private float distanceToEllipseContour = 0.5f;
+    private float distanceToEllipseContour = 0.1f;
 
     // TH_score : percent of number of points on ellipse, within distanceToEllipseContour, default = 0.4
     private float distanceToEllipseContourScoreCutoff = 0.4f;

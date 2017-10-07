@@ -26,8 +26,8 @@ public class Example {
 
     public static void processFile(File screenshot, File outputDirectory, BufferedImage bufferedImage) throws IOException {
         CannyEdgeDetector cannyEdgeDetector = new CannyEdgeDetector();
-//        cannyEdgeDetector.setLowThreshold(0.3125f); // 2.5
-//        cannyEdgeDetector.setHighThreshold(3.75f); // 7.5
+//        cannyEdgeDetector.setLowThreshold(2.5f); // 2.5
+//        cannyEdgeDetector.setHighThreshold(7.5f); // 7.5
         cannyEdgeDetector.setAutoThreshold(true);
         // 2 is default for CannyEdgeDetector but 1 is setting from Ellipse reference code
         cannyEdgeDetector.setGaussianKernelRadius(1f); // 2
@@ -41,7 +41,7 @@ public class Example {
         EllipseDetector ellipseDetector = new EllipseDetector();
         ellipseDetector.setEdgeImage(cannyEdgeDetector);
         ellipseDetector.setUseMedianCenter(true);
-        ellipseDetector.setDistanceToEllipseContour(1);
+        ellipseDetector.setDistanceToEllipseContour(0.5f);
         ellipseDetector.process();
 
         File arcFile = new File(outputDirectory, screenshot.getName().replaceFirst("[.][^.]+$", "") + ".arc.png");
