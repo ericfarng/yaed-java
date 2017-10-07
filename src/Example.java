@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
  * Created by Eric Farng on 9/21/2017.
  */
 
-public class ExampleEllipseDetection {
+public class Example {
 
 
     public static void main(String[] args) throws IOException {
