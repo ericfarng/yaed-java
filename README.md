@@ -31,9 +31,10 @@ List<Ellipse> ellipseList = ellipseDetector.getFinalEllipseList();
 
 1. Play with the 4 parameters of the Canny edge detector and make sure the ellipse edge is visible here.
 2. Parameters for the ellipse detection:
- 1. minimumArcPixelCount = remove small ellipses / noise.
- 2. minimumBoundingBoxSize = remove straight lines
- 3. distanceToEllipseContour, distanceToEllipseContourScoreCutoff, reliabilityCutoff = allow for more ellipse detection, but worse fits
+  1. minimumArcPixelCount = remove small ellipses / noise.
+  2. minimumBoundingBoxSize = remove straight lines
+  3. distanceToEllipseContour, distanceToEllipseContourScoreCutoff, reliabilityCutoff = remove poorly fitting ellipses and ellipse noise
+3. If things aren't working, check out the example for details how to output intermediate debug images 
 
 ### References
 
