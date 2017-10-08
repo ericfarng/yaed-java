@@ -30,9 +30,9 @@ List<Ellipse> ellipseList = ellipseDetector.getFinalEllipseList();
 
 1. Play with the 4 parameters of the Canny edge detector and make sure the ellipse edge is visible here.
 2. Parameters for the ellipse detection:
-  1. ```minimumArcPixelCount``` = remove small ellipses / noise.
-  2. ```minimumBoundingBoxSize``` = remove straight lines
-  3. ```distanceToEllipseContour```, ```distanceToEllipseContourScoreCutoff```, ```reliabilityCutoff``` = remove poorly fitting ellipses and ellipse noise
+  * ```minimumArcPixelCount``` = remove small ellipses / noise.
+  * ```minimumBoundingBoxSize``` = remove straight lines
+  * ```distanceToEllipseContour```, ```distanceToEllipseContourScoreCutoff```, ```reliabilityCutoff``` = remove poorly fitting ellipses and ellipse noise
 3. If things aren't working, check out the example for details how to output intermediate debug images 
 4. Auto-threshold for the Canny edge detector is not fast and linear with the size of the image.
 Setting low/high threshold is much faster. Also, auto-threshold still has some parameters. Check out the code if it is
@@ -45,7 +45,7 @@ not working
 
 **[1]** A fast and effective ellipse detector for embedded vision applications
 
-Michele Fornaciariab, Andrea Pratibc, Rita Cucchiaraab
+Michele Fornaciari, Andrea Prati, Rita Cucchiara
 
 http://ieeexplore.ieee.org/document/6470150/
 
